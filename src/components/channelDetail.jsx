@@ -52,3 +52,4 @@ const ChannelDetail = ({ id }) => {
 };
 
 export default ChannelDetail;
+
