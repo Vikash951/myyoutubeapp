@@ -24,7 +24,7 @@ const MainContainer = () => {
   return (
     <div className="p-4">
       <ButtonList />
-      <VideoContainer />
+      <VideoContainer className = "mx-auto"/>
     </div>
   );
 };
