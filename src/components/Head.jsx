@@ -189,7 +189,7 @@ const Head = () => {
 
   return (
     <div className="flex items-center justify-between bg-white px-4 py-2 fixed z-50 top-0 left-0 w-full shadow-md">
-      <div className="flex items-center">
+      <div className="flex items-center min-w-max mr-2 sm:mr-4">
         <img
           onClick={toggleMenuHandler}
           className="w-8 h-8 sm:w-10 sm:h-10 cursor-pointer"
@@ -201,7 +201,7 @@ const Head = () => {
         </Link>
       </div>
 
-      <div className="flex items-center flex-grow max-w-2xl relative">
+      <div className="flex items-center flex-grow max-w-xl mx-2 relative">
         <input
           className="border border-gray-300 w-full px-4 py-2 rounded-l-full bg-white focus:outline-none"
           type="text"
@@ -230,7 +230,7 @@ const Head = () => {
         )}
       </div>
 
-      <div className="flex items-center">
+      <div className="flex items-center min-w-max ml-2 sm:ml-4">
         <img className="h-6 w-6 sm:h-7 sm:w-7 mr-3 cursor-pointer" src={bell_icon} alt="bell-icon" />
         <img className="h-8 w-8 sm:h-10 sm:w-10 rounded-full cursor-pointer" src={user_icon} alt="user" />
       </div>
