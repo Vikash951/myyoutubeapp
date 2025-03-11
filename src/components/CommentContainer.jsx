@@ -1,7 +1,10 @@
+
+
+
 import { useEffect, useState } from "react";
 import { GOOGLE_API_KEY } from "../utils/constant";
 
-// Function to calculate time ago
+
 const timeAgo = (publishedAt) => {
   const currentDate = new Date();
   const commentDate = new Date(publishedAt);
@@ -11,8 +14,8 @@ const timeAgo = (publishedAt) => {
   const diffInMins = diffInSecs / 60;
   const diffInHours = diffInMins / 60;
   const diffInDays = diffInHours / 24;
-  const diffInMonths = diffInDays / 30; // Approximate months
-  const diffInYears = diffInDays / 365; // Approximate years
+  const diffInMonths = diffInDays / 30; 
+  const diffInYears = diffInDays / 365; 
 
   let timeAgoText = "";
 
@@ -51,31 +54,28 @@ const CommentContainer = ({ id }) => {
     }
   }, [id]);
 
-  
-
   return (
-    <div className="comments-container bg-white p-4 rounded-lg shadow-md mt-4 pl-25">
-      <h1 className="text-3xl font-semibold mb-4">Comments</h1>
-      <ul className="comments-list space-y-4">
+    <div className="comments-container bg-white p-3 md:p-4 rounded-lg shadow-md mt-4 w-full">
+      <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-2 md:mb-4">Comments</h1>
+      <ul className="comments-list space-y-3 md:space-y-4">
         {info.map((user, index) => (
-          <li key={index} className="comment-item p-4 border-b border-gray-200">
-            <div className="flex gap-3 items-start">
+          <li key={index} className="comment-item p-2 md:p-4 border-b border-gray-200">
+            <div className="flex gap-2 md:gap-3 items-start">
               <img
-                className="w-10 h-10 rounded-full object-cover"
+                className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover"
                 src={user?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl}
                 alt="user profile"
               />
-              <div className="comment-content">
+              <div className="comment-content flex-1 min-w-0">
                 <div className="comment-header flex items-center space-x-2">
-                  <span className="font-semibold text-sm">
+                  <span className="font-semibold text-xs md:text-sm truncate">
                     {user?.snippet?.topLevelComment?.snippet?.authorDisplayName}
                   </span>
                 </div>
-                <p className="comment-text text-gray-800 mt-2 text-sm">
+                <p className="comment-text text-gray-800 mt-1 md:mt-2 text-xs md:text-sm break-words">
                   {user?.snippet?.topLevelComment?.snippet?.textDisplay}
                 </p>
-                <div className="comment-footer mt-2 text-gray-500 text-xs">
-                  {/* Add logic for time ago */}
+                <div className="comment-footer mt-1 md:mt-2 text-gray-500 text-xs">
                   <span>{timeAgo(user?.snippet?.topLevelComment?.snippet?.publishedAt)}</span>
                 </div>
               </div>
@@ -88,5 +88,3 @@ const CommentContainer = ({ id }) => {
 };
 
 export default CommentContainer;
-
-

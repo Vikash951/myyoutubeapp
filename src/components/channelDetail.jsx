@@ -1,10 +1,13 @@
+
+
+
 import React, { useEffect, useState } from 'react';
 import { GOOGLE_API_KEY } from '../utils/constant';
 
 const ChannelDetail = ({ id }) => {
   const [channelName, setChannelName] = useState('');
   const [channelIcon, setChannelIcon] = useState('');
-  const [subscriberCount , setSubscriberCount] = useState(0);
+  const [subscriberCount, setSubscriberCount] = useState(0);
 
   const getChannelDetail = async () => {
     const response = await fetch(
@@ -14,18 +17,13 @@ const ChannelDetail = ({ id }) => {
     const json = await response.json();
     const data_json = await data.json();
 
-    console.log(data_json);
-
+   
     
     if (!response.ok || !json.items || json.items.length === 0) {
       setChannelName('Unknown Channel');
       setChannelIcon('https://via.placeholder.com/150'); 
       return;
     }
-
-    // if(!response.ok || !json.items || json.items.length === 0){
-
-    // }
 
     setSubscriberCount(data_json?.items[0]?.statistics?.subscriberCount);
     setChannelName(json.items[0].snippet.localized.title);
@@ -39,17 +37,15 @@ const ChannelDetail = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="flex items-center gap-4">
-    <img className="w-12 h-12 rounded-full" src={channelIcon} alt="Channel Icon" />
-    <div className="flex flex-col">
-      <div className='font-bold text-lg'>{channelName}</div>
-      <div className='text-sm'>{subscriberCount} subscribers</div>
+    <div className="flex flex-wrap items-center gap-2 md:gap-4">
+      <img className="w-10 h-10 md:w-12 md:h-12 rounded-full" src={channelIcon} alt="Channel Icon" />
+      <div className="flex flex-col">
+        <div className="font-bold text-base md:text-lg truncate max-w-[180px] sm:max-w-none">{channelName}</div>
+        <div className="text-xs md:text-sm">{subscriberCount} subscribers</div>
+      </div>
+      <button className="bg-black rounded-xl p-1.5 md:p-2 text-sm md:text-base text-white ml-2 md:ml-5">Subscribe</button>
     </div>
-    <button className="bg-black rounded-xl p-2 text-white ml-5">Subscribe</button>
-  </div>
-  
   );
 };
 
 export default ChannelDetail;
-
