@@ -138,10 +138,18 @@ import {
 import { Link } from "react-router";
 import { cacheResults } from "../utils/searchSlice";
 
+
+import { useNavigate } from "react-router";
+
+
+
+
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const navigate = useNavigate();  
 
   const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
@@ -187,6 +195,16 @@ const Head = () => {
     dispatch(toggleMenu());
   };
 
+  const handleSuggectionClick = async (suggestion)=>{
+    try{
+      navigate(`/search?q=${encodeURIComponent(suggestion)}`);
+    }
+    catch(error){
+      console.error("Error handling suggestion click:" , error);
+    }
+  }
+
+  
   return (
     <div className="flex items-center justify-between bg-white px-4 py-2 fixed z-50 top-0 left-0 w-full shadow-md">
       <div className="flex items-center min-w-max mr-2 sm:mr-4">
@@ -209,7 +227,11 @@ const Head = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
-          onBlur={() => setShowSuggestions(false)}
+          onBlur={() => {
+            setTimeout(() => {
+              setShowSuggestions(false);
+            }, 200); 
+          }}
         />
         <button className="border border-gray-300 border-l-0 px-4 py-[10px] rounded-r-full text-gray-500">
           <img src={search_icon} alt="search-icon" className="w-5 h-5" />
@@ -220,9 +242,9 @@ const Head = () => {
           <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-lg mt-2 shadow-md z-10">
             <ul>
               {suggestions.map((suggestion, index) => (
-                <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-200 flex items-center">
+                <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-200 flex items-center" onMouseDown = {()=>handleSuggectionClick(suggestion)}>
                   <img src={search_icon} alt="search-icon" className="w-4 h-4 mr-2" />
-                  {suggestion}
+                   {suggestion} 
                 </li>
               ))}
             </ul>
