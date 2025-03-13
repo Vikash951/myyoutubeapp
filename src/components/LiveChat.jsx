@@ -28,7 +28,7 @@ const LiveChat = () => {
 
   return (
     <>
-      <div className="w-full h-[600px] ml-2 p-2 border border-black bg-slate-100 rounded-lg overflow-y-scroll flex flex-col-reverse">
+      <div className="w-full h-[600px] ml-2 p-2 border border-gray-400 rounded-lg overflow-y-scroll flex flex-col-reverse">
         <div>
           {
             // Disclaimer: Don't use indexes as keys
@@ -40,7 +40,7 @@ const LiveChat = () => {
       </div>
 
       <form
-        className="w-full border border-gray-400 my-2 rounded-lg p-2 flex flex-wrap items-center gap-2"
+        className=" ml-[8px] w-full border border-gray-400 my-2 rounded-lg p-2 flex flex-wrap items-center gap-2"
         onSubmit={(e) => {
           e.preventDefault();
 
