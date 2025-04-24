@@ -40,9 +40,7 @@ const CommentContainer = ({ id }) => {
   const [info, setInfo] = useState([]);
 
   const getComments = async () => {
-    const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/commentThreads?key=${GOOGLE_API_KEY}&textFormat=plainText&part=snippet&videoId=${id}&maxResults=100`
-    );
+    const response = await fetch(`https://www.googleapis.com/youtube/v3/commentThreads?key=${GOOGLE_API_KEY}&textFormat=plainText&part=snippet&videoId=${id}&maxResults=100`);
     const json = await response.json();
   
     setInfo(json.items);

@@ -160,12 +160,13 @@ const Head = () => {
       return;
     }
 
+    //caching logic
+    if (searchCache[searchQuery]) {
+      setSuggestions(searchCache[searchQuery]); 
+    } 
+
     const timer = setTimeout(() => {
-      if (searchCache[searchQuery]) {
-        setSuggestions(searchCache[searchQuery]); 
-      } else {
         getSearchSuggestions();
-      }
     }, 200);
 
     return () => clearTimeout(timer);
@@ -174,6 +175,8 @@ const Head = () => {
   const getSearchSuggestions = async () => {
     try {
       const proxyUrl = "https://api.allorigins.win/get?url=";
+
+      //encodeURIComponent() converts special characters in a string to a format that can be safely included in a URL.
       const apiUrl = encodeURIComponent(`http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${searchQuery}`);
   
       const response = await fetch(proxyUrl + apiUrl);
@@ -186,7 +189,8 @@ const Head = () => {
       } else {
         setSuggestions([]);
       }
-    } catch (error) {
+    }
+     catch (error) {
       console.error("Error fetching search suggestions:", error);
     }
   };

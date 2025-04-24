@@ -10,10 +10,9 @@ const ChannelDetail = ({ id }) => {
   const [subscriberCount, setSubscriberCount] = useState(0);
 
   const getChannelDetail = async () => {
-    const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${id}&key=${GOOGLE_API_KEY}`
-    );
+    const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${id}&key=${GOOGLE_API_KEY}`);
     const data = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${id}&key=${GOOGLE_API_KEY}`)
+    
     const json = await response.json();
     const data_json = await data.json();
 

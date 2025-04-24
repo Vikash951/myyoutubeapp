@@ -19,6 +19,7 @@ const list = [
 ];
 
 const getRandomCategories = (arr, num) => {
+  //The comparator function () => 0.5 - Math.random() returns a random number between -0.5 and 0.5. This random value determines the "sorting order" between two elements, effectively shuffling them in a seemingly random order.
   let shuffled = [...arr].sort(() => 0.5 - Math.random()); 
   return shuffled.slice(0, num); 
 };
